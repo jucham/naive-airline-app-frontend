@@ -1,6 +1,6 @@
 # NaiveAirlineAppFrontend
 
-![CircleCI](https://img.shields.io/circleci/build/gh/jucham/naive-airline-app-frontend/master?token=fabd8e6cfd9372fd48fbb059d9b6c7c93647ae77)
+![CircleCI](https://img.shields.io/circleci/build/gh/jucham/naive-airline-app-frontend)
 
 [![codecov](https://codecov.io/gh/jucham/naive-airline-app-frontend/branch/master/graph/badge.svg?token=q0Feoowsyk)](https://codecov.io/gh/jucham/naive-airline-app-frontend)
 
