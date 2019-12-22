@@ -1,0 +1,21 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.5
+jobs:
+  build:
+    working_directory: ~/naive-airline-app-frontend
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: naive-airline-app-frontend-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          key: naive-airline-app-frontend-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - "node_modules"
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --code-coverage
+      - codecov/upload:
+          file: ./coverage/naive-airline-app-frontend/lcov.info
+      #- run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js

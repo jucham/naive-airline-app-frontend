@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-content>
+    <div class="flight-offer" fxLayout="row" fxLayoutGap="2%" fxFlexAlign="flex-start">
+      <div class="flight-info" fxFlex="0 1 calc(80% - 2%)">
+        <span>{{ flightOffer.departure }} {{flightOffer.departureDate}}
+          &#9992; {{ flightOffer.arrival }} {{flightOffer.arrivalDate}}</span>
+        <div class="flight-info-details" fxLayout="row" fxLayoutGap="1em">
+          <div><b>Duration</b> : {{flightOffer.duration}} min.</div>
+          <div><b>Flight number</b> : NA{{flightOffer.flightNumber}}</div>
+          <div><b>Remaining seats</b> : {{flightOffer.remainingSeats}}</div>
+        </div>
+      </div>
+      <div class="flight-price" fxFlex="0 1 calc(20%)">
+        <div>
+          {{flightOffer.totalPrice | currency:'EUR'}}
+        </div>
+        <div>
+          <button mat-raised-button type="submit" color="accent">Book</button>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,74 @@
+<mat-card class="search-flight-card">
+
+  <mat-card-header class="search-flight-card-header">
+    <h1>Search a flight</h1>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form fxLayout="column" [formGroup]="myFormGroup" (ngSubmit)="onSearchButtonClicked()">
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Departure</mat-label>
+        <input #departure id="departureInput" matInput placeholder="Enter a location" [formControl]="departureControl"
+               [matAutocomplete]="autoDeparture" (focus)="onDepartureFocus()" required>
+        <mat-error *ngIf="departureControl.invalid">{{"A departure location is required"}}</mat-error>
+        <mat-autocomplete #autoDeparture="matAutocomplete" [displayWith]="displayAirport" autoActiveFirstOption>
+          <mat-option *ngFor="let airport of (departureAirports$ | async)" [value]="airport">
+            {{airport.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Arrival</mat-label>
+        <input #arrival id="arrivalInput" matInput placeholder="Enter a location" [formControl]="arrivalControl"
+               [matAutocomplete]="autoArrival" (focus)="onArrivalFocus()" required>
+        <mat-error *ngIf="arrivalControl.invalid">{{"A arrival location is required"}}</mat-error>
+        <mat-autocomplete #autoArrival="matAutocomplete" [displayWith]="displayAirport" autoActiveFirstOption>
+          <mat-option *ngFor="let airport of (arrivalAirports$ | async)" [value]="airport">
+            {{airport.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Departure Date</mat-label>
+        <input #departureDate id="departureDateInput" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+               [formControl]="departureDateControl"
+               placeholder="Choose a date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="month"></mat-datepicker>
+        <mat-error
+          *ngIf="departureDateControl.hasError('invalidDepartureDate')">{{"Departure date is in past"}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label> Number of passengers</mat-label>
+        <input #numberOfPassengers matInput type="text" id="numberOfPassengersInput" placeholder=""
+               [formControl]="numberOfPassengersControl"
+               required>
+        <mat-error *ngIf="numberOfPassengersControl.hasError('noPassengerAtAll')">
+          {{'it must be at least one passenger.'}}
+        </mat-error>
+        <mat-error *ngIf="numberOfPassengersControl.hasError('tooMuchPassengers')">
+          {{'it could be 10 passengers at maximum.'}}
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" color="accent" [class.loading]="waitingSearchResults">
+        <mat-icon>search</mat-icon>
+        <span>Search</span>
+      </button>
+
+    </form>
+  </mat-card-content>
+
+<!--  <mat-card-actions fxLayout="column" fxLayoutAlign="center center"></mat-card-actions>-->
+</mat-card>
+
+<app-progress-spinner
+  id="progress-spinner"
+  [color]="'primary'"
+  [mode]="'indeterminate'"
+  [displayProgressSpinner]="waitingSearchResults">
+</app-progress-spinner>

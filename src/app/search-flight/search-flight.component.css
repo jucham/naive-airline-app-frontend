@@ -1,0 +1,18 @@
+button {
+  font-size: large;
+}
+
+mat-card {
+  padding-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+.app-search-flight {
+  width: 50%;
+  margin: 5% 0 5% 0;
+}
+
+.flight-offers {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}

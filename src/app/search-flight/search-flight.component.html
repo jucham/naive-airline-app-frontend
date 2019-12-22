@@ -1,0 +1,17 @@
+<div fxLayout="column" fxFlexAlign="center center" color="primary">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <app-search-flight-form class="app-search-flight" (results)="updateFlightOffers($event)"></app-search-flight-form>
+  </div>
+  <div class="flight-offers" fxLayout="column" fxLayoutGap="2em" fxLayoutAlign="center center">
+    <app-search-flight-offers fxFlexFill *ngFor="let flightOffer of flightOffers" [flightOffer]="flightOffer">
+    </app-search-flight-offers>
+  </div>
+</div>
+
+
+
+
+
+
+
+

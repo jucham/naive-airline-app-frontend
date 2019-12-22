@@ -1,0 +1,11 @@
+button {
+  font-size: large;
+  margin: auto;
+  width: 50%;
+  margin-top: 2em;
+}
+
+mat-card {
+  padding-bottom: 2rem;
+  border-radius: 1rem;
+}
